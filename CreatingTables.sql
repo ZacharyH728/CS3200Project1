@@ -20,13 +20,15 @@ CREATE TABLE IF NOT EXISTS Customers (
 CREATE TABLE IF NOT EXISTS Invoices (
     Invoice_id INTEGER PRIMARY KEY,
     Customer_id INTEGER,
+    User_id INTEGER,
     title TEXT,
     description TEXT,
     date_issued DATETIME,
     due_date DATETIME,
     cost FLOAT,
     status TEXT,
-    FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id)
+    FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id),
+    FOREIGN KEY(User_id) REFERENCES Users(Users_id)
 );
 
 CREATE TABLE IF NOT EXISTS Payments (
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Payments (
 CREATE TABLE IF NOT EXISTS Projects (
     Project_id INTEGER PRIMARY KEY,
     User_id INTEGER,
-    Customer_id INTEGER,
+    Invoice_id INTEGER,
     title TEXT,
     description TEXT,
     start_date DATETIME,
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Projects (
     budget FLOAT,
     status TEXT,
     FOREIGN KEY(User_id) REFERENCES Users(Users_id),
-    FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id)
+    FOREIGN KEY(Invoice_id) REFERENCES Invoices(Invoice_id)
 );
 
 CREATE TABLE IF NOT EXISTS Tasks (
