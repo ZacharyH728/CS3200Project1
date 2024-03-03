@@ -1,0 +1,16 @@
+CREATE TABLE Customer (Customer_id int(10) NOT NULL, Invoid_id int(10) NOT NULL UNIQUE, first_name varchar(255) NOT NULL, last_name varchar(255) NOT NULL, email varchar(255) UNIQUE, phone_number varchar(255), billing_address varchar(255) NOT NULL, PRIMARY KEY (Customer_id));
+CREATE TABLE `User` (User_id int(10) NOT NULL, first_name numeric(64, 0) NOT NULL, last_name numeric(64, 0) NOT NULL, email numeric(64, 0), username numeric(64, 0) NOT NULL, password numeric(64, 0) NOT NULL UNIQUE, phone_number numeric(15, 0), PRIMARY KEY (User_id));
+CREATE TABLE Invoice (Invoice_id int(10) NOT NULL, Customer_id int(10) NOT NULL UNIQUE, User_id int(10) NOT NULL UNIQUE, title varchar(255) NOT NULL, due_date date NOT NULL, cost float NOT NULL, status varchar(255) NOT NULL, description varchar(255), PRIMARY KEY (Invoice_id));
+CREATE TABLE Project (Project_id int(10) NOT NULL, Invoice_id int(10) NOT NULL UNIQUE, title varchar(255) NOT NULL, description varchar(255), start_date date, due_date date, budget float, status varchar(255), PRIMARY KEY (Project_id));
+CREATE TABLE Payment (Payment_id int(10) NOT NULL AUTO_INCREMENT, Invoice_id int(10) NOT NULL UNIQUE, date_paid date, amount_paid float, payment_method varchar(255), PRIMARY KEY (Payment_id));
+CREATE TABLE Task (Task_id int(10) NOT NULL AUTO_INCREMENT, Project_id int(10) NOT NULL UNIQUE, title varchar(255) NOT NULL, description varchar(255), start_date date, due_date date, status varchar(255), PRIMARY KEY (Task_id));
+CREATE TABLE Timesheet (Timesheet_id int(10) NOT NULL AUTO_INCREMENT, Project_id int(10) NOT NULL UNIQUE, Task_id int(10) NOT NULL UNIQUE, `date` date NOT NULL, hours_worked float NOT NULL, description varchar(255), PRIMARY KEY (Timesheet_id));
+CREATE TABLE Timesheet_Task (TimesheetTimesheet_id int(10) NOT NULL, TaskTask_id int(10) NOT NULL, PRIMARY KEY (TimesheetTimesheet_id, TaskTask_id));
+ALTER TABLE Invoice ADD CONSTRAINT FKInvoice681484 FOREIGN KEY (Customer_id) REFERENCES Customer (Customer_id);
+ALTER TABLE Invoice ADD CONSTRAINT FKInvoice397553 FOREIGN KEY (User_id) REFERENCES `User` (User_id);
+ALTER TABLE Payment ADD CONSTRAINT FKPayment416110 FOREIGN KEY (Invoice_id) REFERENCES Invoice (Invoice_id);
+ALTER TABLE Project ADD CONSTRAINT FKProject44990 FOREIGN KEY (Invoice_id) REFERENCES Invoice (Invoice_id);
+ALTER TABLE Task ADD CONSTRAINT FKTask932700 FOREIGN KEY (Project_id) REFERENCES Project (Project_id);
+ALTER TABLE Timesheet ADD CONSTRAINT FKTimesheet895796 FOREIGN KEY (Project_id) REFERENCES Project (Project_id);
+ALTER TABLE Timesheet_Task ADD CONSTRAINT FKTimesheet_835583 FOREIGN KEY (TimesheetTimesheet_id) REFERENCES Timesheet (Timesheet_id);
+ALTER TABLE Timesheet_Task ADD CONSTRAINT FKTimesheet_700943 FOREIGN KEY (TaskTask_id) REFERENCES Task (Task_id);
