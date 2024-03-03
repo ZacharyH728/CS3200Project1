@@ -1,4 +1,4 @@
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     Users_id INTEGER PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
@@ -8,7 +8,7 @@ CREATE TABLE Users (
     phone_number TEXT
 );
 
-CREATE TABLE Customers (
+CREATE TABLE IF NOT EXISTS Customers (
     Customer_id INTEGER PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
@@ -17,7 +17,7 @@ CREATE TABLE Customers (
     phone_number Text
 );
 
-CREATE TABLE Invoices (
+CREATE TABLE IF NOT EXISTS Invoices (
     Invoice_id INTEGER PRIMARY KEY,
     Customer_id INTEGER,
     title TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE Invoices (
     FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id)
 );
 
-CREATE TABLE Payments (
+CREATE TABLE IF NOT EXISTS Payments (
     Payment_id INTEGER PRIMARY KEY,
     Invoice_id INTEGER,
     date_paid DATETIME,
@@ -38,7 +38,7 @@ CREATE TABLE Payments (
     FOREIGN KEY (Invoice_id) REFERENCES Invoices(Invoice_id)
 );
 
-CREATE TABLE Projects (
+CREATE TABLE IF NOT EXISTS Projects (
     Project_id INTEGER PRIMARY KEY,
     User_id INTEGER,
     Customer_id INTEGER,
@@ -52,7 +52,7 @@ CREATE TABLE Projects (
     FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id)
 );
 
-CREATE TABLE Tasks (
+CREATE TABLE IF NOT EXISTS Tasks (
     Task_id INTEGER PRIMARY KEY,
     Project_id INTEGER,
     title TEXT,
@@ -63,7 +63,7 @@ CREATE TABLE Tasks (
     FOREIGN KEY(Project_id) REFERENCES Projects(Project_id)
 );
 
-CREATE TABLE Timesheets (
+CREATE TABLE IF NOT EXISTS Timesheets (
     Timesheet_id INTEGER PRIMARY KEY,
     Project_id INTEGER,
     Task_id INTEGER,
@@ -74,7 +74,7 @@ CREATE TABLE Timesheets (
     FOREIGN KEY (Task_id) REFERENCES Tasks (Task_id)
 );
 
-CREATE TABLE Timesheet_Task (
+CREATE TABLE IF NOT EXISTS Timesheet_Task (
     Timesheet_id INTEGER,
     Task_id INTEGER,
     PRIMARY KEY (Timesheet_id, Task_id),
