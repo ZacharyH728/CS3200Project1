@@ -4,9 +4,15 @@ SELECT
     Customers.last_name,
     COUNT(Projects.Project_id) OVER (PARTITION BY Customers.Customer_id) as num_projects
     FROM Customers
-JOIN Projects ON Customers.Customer_id = Projects.;
+JOIN Invoices ON Customers.Customer_id = Invoices.Customer_id
+INNER JOIN Projects ON Invoices.Invoice_id = Projects.Invoice_id
 
 
 --Example output
 --first_name, last_name, num_projects
---Lindsay,Gittins,1
+-- Roycroft,1
+-- Kiehl,1
+-- Jedrych,1
+-- Sobieski,1
+-- Hemphall,1
+-- De Roberto,1

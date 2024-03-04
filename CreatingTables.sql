@@ -35,11 +35,9 @@ CREATE TABLE IF NOT EXISTS Invoices (
 
 CREATE TABLE IF NOT EXISTS Payments (
     Payment_id INTEGER PRIMARY KEY,
-    Invoice_id INTEGER,
     date_paid DATETIME,
     amount_paid FLOAT,
     payment_method TEXT,
-    FOREIGN KEY (Invoice_id) REFERENCES Invoices(Invoice_id)
 );
 
 CREATE TABLE IF NOT EXISTS Projects (
