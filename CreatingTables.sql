@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS Invoices (
     Invoice_id INTEGER PRIMARY KEY,
     Customer_id INTEGER,
     User_id INTEGER,
+    Payment_id INTEGER,
     title TEXT,
     description TEXT,
     date_issued DATETIME,
@@ -28,7 +29,8 @@ CREATE TABLE IF NOT EXISTS Invoices (
     cost FLOAT,
     status TEXT,
     FOREIGN KEY(Customer_id) REFERENCES Customers(Customer_id),
-    FOREIGN KEY(User_id) REFERENCES Users(Users_id)
+    FOREIGN KEY(User_id) REFERENCES Users(Users_id),
+    FOREIGN KEY(Payment_id) REFERENCES Payments(Payment_id)
 );
 
 CREATE TABLE IF NOT EXISTS Payments (
@@ -42,7 +44,6 @@ CREATE TABLE IF NOT EXISTS Payments (
 
 CREATE TABLE IF NOT EXISTS Projects (
     Project_id INTEGER PRIMARY KEY,
-    User_id INTEGER,
     Invoice_id INTEGER,
     title TEXT,
     description TEXT,
@@ -50,7 +51,6 @@ CREATE TABLE IF NOT EXISTS Projects (
     end_date DATETIME,
     budget FLOAT,
     status TEXT,
-    FOREIGN KEY(User_id) REFERENCES Users(Users_id),
     FOREIGN KEY(Invoice_id) REFERENCES Invoices(Invoice_id)
 );
 
